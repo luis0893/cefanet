@@ -48,6 +48,7 @@ urlpatterns = [
     path('person/añadir/', PerAPIView.as_view(), name='person-crear'),
     path('person/<int:id>/edit/', PersonaEditAPIView.as_view(), name='person-update'),
     path('person/<int:id>/delete/', PersonaDeleteAPIView.as_view(), name='person-delete'),
+    path('person/recog/',PersonRecog.as_view(), name='person-recognition'),
 ]
 """""
 

@@ -94,7 +94,25 @@ WSGI_APPLICATION = 'facerecog.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-
+# [START db_setup]
+# if os.getenv('GAE_APPLICATION', None):
+#     # Running on production App Engine, so connect to Google Cloud SQL using
+#     # the unix socket at /cloudsql/<your-cloudsql-connection string>
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'HOST': '/cloudsql/gold-stone-235802:us-central1:face',
+#         'USER': 'postgres',
+#         'PASSWORD': 'potrojurado',
+#         'NAME': 'postgres',
+#     }
+# }
+#
+# else:
+# Running locally so connect to either a local MySQL instance or connect
+# to Cloud SQL via the proxy.  To start the proxy via command line:
+#    $ cloud_sql_proxy -instances=gold-stone-235802:us-central1:peplost=tcp:3306
+# See https://cloud.google.com/sql/docs/mysql-connect-proxy
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -105,6 +123,7 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+# [END db_setup]
 #unable to connect to server for Postgres
 
 # Password validation

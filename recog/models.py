@@ -1,13 +1,11 @@
-from cv2.cv2 import max
-from PIL import Image,ExifTags
-import os
+
 from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
 from image_cropping import ImageRatioField
 from .utils import *
 from django.dispatch import receiver
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save,post_delete
 from django.dispatch import receiver
 from .helper import *
 from django.core.validators import MaxValueValidator, MinValueValidator
@@ -73,25 +71,13 @@ def update_image(sender, instance, **kwargs):
         # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         # fullpath = BASE_DIR + instance.facePicture.url
         detected_face(img,id)
-        #instance.faceData =""
-        # face = kwargs['instance'].faceData
-        #instance.faceData=str(add_user_img_path(detected_face(img)))
-        #instance.faceData.save()
-        # image_64_encode = kwargs['instance'].faceData
-        # image_64_decode = base64.decodestring(image_64_encode)
-        #print("el vector es {0}"+instance.faceData)
-        #instance.save()
 
-# @receiver(post_save, sender=Person, dispatch_uid="codificacion_imagen")
-# def add_facecode(sender, instance, **kwargs):
-#
-#     #if instance.faceData:
-#     #instance.faceData =""
-#     img = instance.facePicture
-#     instance.faceData=str(add_user_img_path(img))
-#     print("este vlor {0}"+instance.faceData)
-#     #instance.faceData.save()
-#     #instance.save()
+@receiver(post_delete, sender=Person)
+def instance_deleted(sender, instance, **kwargs):
+    if instance.id:
+        id = instance.id
+        delete_user(id)
+
 class Profile(models.Model):
     phone_validator = RegexValidator(regex=r'^\+?1?\d{9,15}$')
     user = models.OneToOneField(User,null=True, on_delete=models.CASCADE)
