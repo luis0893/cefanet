@@ -33,7 +33,7 @@ idna==2.7
 image==1.5.27
 itypes==1.1.0
 jdcal==1.4
-Jinja2==2.10
+Jinja2==2.11.3
 Keras==2.2.2
 Keras-Applications==1.0.6
 Keras-Preprocessing==1.0.5
