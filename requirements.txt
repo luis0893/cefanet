@@ -15,7 +15,7 @@ Django==2.1.1
 django-allauth==0.37.1
 django-appconf==1.0.2
 django-cleanup==2.1.0
-django-debug-toolbar==1.10.1
+django-debug-toolbar==1.11.1
 django-extra-fields==1.0.0
 django-grappelli==2.11.1
 django-image-cropping==1.2.0
